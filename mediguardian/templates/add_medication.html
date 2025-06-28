@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MediGuardian - Add Medication</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --teal: #20B2AA;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .medication-form {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .form-header {
+            border-bottom: 2px solid var(--teal);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .icon-options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .icon-option {
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        .icon-option.selected {
+            border-color: var(--teal);
+            background-color: rgba(32, 178, 170, 0.1);
+            transform: scale(1.1);
+        }
+        .icon-option:hover {
+            background-color: rgba(32, 178, 170, 0.1);
+        }
+        .back-button {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <a href="/manage_medications" class="btn btn-primary back-button">
+            <i class="fas fa-arrow-left"></i> Back to Medications
+        </a>
+        
+        <div class="medication-form">
+            <div class="form-header">
+                <h2><i class="fas fa-pills"></i> Add New Medication</h2>
+                <p class="text-muted">Complete the form to add a new medication to the schedule</p>
+            </div>
+            
+            <form method="POST" action="/add_medication">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Medication Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="dose" class="form-label">Dose</label>
+                    <input type="text" class="form-control" id="dose" name="dose" 
+                           placeholder="e.g., 50 mg, 10 units, 500 mcg" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="schedule" class="form-label">Schedule Times</label>
+                    <input type="text" class="form-control" id="schedule" name="schedule" 
+                           placeholder="Enter times separated by commas (e.g., 08:00, 13:00, 20:00)" required>
+                    <div class="form-text">Use 24-hour format (HH:MM)</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Select Icon</label>
+                    <div class="icon-options">
+                        <div class="icon-option" data-icon="💊" onclick="selectIcon(this)">💊</div>
+                        <div class="icon-option" data-icon="💉" onclick="selectIcon(this)">💉</div>
+                        <div class="icon-option" data-icon="🧪" onclick="selectIcon(this)">🧪</div>
+                        <div class="icon-option" data-icon="🧴" onclick="selectIcon(this)">🧴</div>
+                        <div class="icon-option" data-icon="💧" onclick="selectIcon(this)">💧</div>
+                        <div class="icon-option" data-icon="🧼" onclick="selectIcon(this)">🧼</div>
+                    </div>
+                    <input type="hidden" id="icon" name="icon" value="💊">
+                </div>
+                
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="critical" name="critical">
+                    <label class="form-check-label" for="critical">Critical Medication</label>
+                    <div class="form-text">Critical medications trigger emergency alerts if missed</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="shape" class="form-label">Pill Shape (for verification)</label>
+                    <select class="form-select" id="shape" name="shape">
+                        <option value="round">Round</option>
+                        <option value="oval">Oval</option>
+                        <option value="rectangular">Rectangular</option>
+                        <option value="capsule">Capsule</option>
+                        <option value="square">Square</option>
+                    </select>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="color" class="form-label">Pill Color (for verification)</label>
+                    <input type="text" class="form-control" id="color" name="color" 
+                           placeholder="e.g., white, blue, yellow">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="imprint" class="form-label">Pill Imprint (for verification)</label>
+                    <input type="text" class="form-control" id="imprint" name="imprint" 
+                           placeholder="e.g., L50, ASP81, M500">
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-lg w-100">
+                    <i class="fas fa-save"></i> Save Medication
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        function selectIcon(element) {
+            // Remove selected class from all icons
+            document.querySelectorAll('.icon-option').forEach(icon => {
+                icon.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked icon
+            element.classList.add('selected');
+            
+            // Set hidden input value
+            document.getElementById('icon').value = element.getAttribute('data-icon');
+        }
+        
+        // Initialize with first icon selected
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.icon-option').classList.add('selected');
+        });
+    </script>
+</body>
+</html>

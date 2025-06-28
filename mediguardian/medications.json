@@ -1,0 +1,57 @@
+{
+    "Levothyroxine": {
+        "shape": "oval",
+        "color": "white",
+        "imprint": "L50",
+        "schedule": [
+            "06:30"
+        ],
+        "critical": true,
+        "dose": "50 mcg",
+        "icon": "\ud83d\udc8a"
+    },
+    "Aspirin": {
+        "shape": "round",
+        "color": "white",
+        "imprint": "ASP81",
+        "schedule": [
+            "08:00"
+        ],
+        "critical": false,
+        "dose": "75 mg",
+        "icon": "\ud83d\udc8a"
+    },
+    "Metformin": {
+        "shape": "oval",
+        "color": "blue",
+        "imprint": "M500",
+        "schedule": [
+            "13:00"
+        ],
+        "critical": true,
+        "dose": "500 mg",
+        "icon": "\ud83d\udc8a"
+    },
+    "Donepezil": {
+        "shape": "round",
+        "color": "yellow",
+        "imprint": "D5",
+        "schedule": [
+            "20:00"
+        ],
+        "critical": true,
+        "dose": "5 mg",
+        "icon": "\ud83d\udc8a"
+    },
+    "Atorvastatin": {
+        "shape": "oval",
+        "color": "pink",
+        "imprint": "A10",
+        "schedule": [
+            "21:00"
+        ],
+        "critical": false,
+        "dose": "10 mg",
+        "icon": "\ud83d\udc8a"
+    }
+}
